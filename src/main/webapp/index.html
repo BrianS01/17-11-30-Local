@@ -1,16 +1,41 @@
 <!-- 
- *      Author :::  Brian Sterling
+ *      Author ::: Brian Sterling
  *     Program ::: Bases de Datos
  *  Credential ::: SIST0008-G01:SIV
 -->
 <!DOCTYPE html>
 <html>
     <head>
-        <title>HEROKU</title>
-        <meta charset="windows-1252">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tiendita Online</title>     
     </head>
     <body>
-        <h1>Bienvenido a Heroku JAVA</h1>
+        <h1 style="color:gray; font-size:88%;">Usuario: fabian | Contraseña: bases</h1>
+        <center>
+            <h1>ENTRAR</h1>
+            <form name="login">
+                <label for="username">Nombre</label>
+                <br/>
+                <input type="text" name="userid"/>
+                <br/>
+                <label for="password">Contraseña</label>
+                <br/>
+                <input type="password" name="pswrd"/>
+                <br/>
+            <input type="button" onclick="check(this.form)" value="Ingresar"/>
+            <script language="javascript">
+                function check(form)
+                {
+                    if (form.userid.value === "fabian" && form.pswrd.value === "bases")
+                    {
+                        window.open('inicio.jsp');
+                    }
+                    else
+                    {
+                        alert("Error de Usuario o Contraseña");
+                    }
+                }
+            </script>
+        </center>    
     </body>
 </html>
