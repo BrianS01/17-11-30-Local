@@ -12,5 +12,41 @@
         <welcome-file>default.htm</welcome-file>
         <welcome-file>default.jsp</welcome-file>
     </welcome-file-list>
-     
+     <servlet>
+        <servlet-name>Index</servlet-name>
+        <servlet-class>controlador.Index</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Siniestro</servlet-name>
+        <servlet-class>controlador.Siniestro</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Vehiculo</servlet-name>
+        <servlet-class>controlador.Vehiculo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Cliente</servlet-name>
+        <servlet-class>controlador.Cliente</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Index</servlet-name>
+        <url-pattern>/Index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Siniestro</servlet-name>
+        <url-pattern>/Siniestro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Vehiculo</servlet-name>
+        <url-pattern>/Vehiculo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cliente</servlet-name>
+        <url-pattern>/Cliente</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
 </web-app>
