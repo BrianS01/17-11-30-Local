@@ -29,9 +29,8 @@ public class EmpleadoDAO
     {
         try
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into empleado(idEmpleado,nombre) values (?, ?)");
-            preparedStatement.setInt(1, user.getIdEmpleado());
-            preparedStatement.setString(2, user.getNombre());
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into empleado(nombre) values (?)");
+            preparedStatement.setString(1, user.getNombre());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -45,7 +44,6 @@ public class EmpleadoDAO
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("delete from empleado where idEmpleado=?");
-            // Parameters start with 1
             preparedStatement.setInt(1, idEmpleado);
             preparedStatement.executeUpdate();
         }
@@ -59,9 +57,8 @@ public class EmpleadoDAO
     {
         try 
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("update empleado set idEmpleado=?, nombre=?" + "where idEmpleado=?");
-            preparedStatement.setInt(1, user.getIdEmpleado());
-            preparedStatement.setString(2, user.getNombre());
+            PreparedStatement preparedStatement = connection.prepareStatement("update empleado set nombre=?" + "where idEmpleado=?");
+            preparedStatement.setString(1, user.getNombre());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -73,6 +70,7 @@ public class EmpleadoDAO
     public List<Empleado> getAllUsers()
     {
         List<Empleado> users = new ArrayList<Empleado>();
+        
         try
         {
             System.out.println("Llegue hasta aca");
@@ -97,11 +95,13 @@ public class EmpleadoDAO
     public Empleado getUserById(int idProducto)
     {
         Empleado user = new Empleado();
+        
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("select * from empleado where idEmpleado=?");
             preparedStatement.setInt(1, idProducto);
             ResultSet rs = preparedStatement.executeQuery();
+            
             if (rs.next())
             {
                 user.setIdEmpleado(rs.getInt("idEmpleado"));

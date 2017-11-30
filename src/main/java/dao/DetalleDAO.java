@@ -29,11 +29,10 @@ public class DetalleDAO
     {
         try
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into detalle(idDetalle,nombreCliente,cedula,fecha) values (?, ?, ?, ?)");
-            preparedStatement.setInt(1, user.getIdDetalle());
-            preparedStatement.setString(2, user.getNombreCliente());
-            preparedStatement.setInt(3, user.getCedula());
-            preparedStatement.setDate(4, new java.sql.Date(user.getFecha().getTime()));
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into detalle(nombreCliente, cedula, fecha) values (?, ?, ?)");
+            preparedStatement.setString(1, user.getNombreCliente());
+            preparedStatement.setInt(2, user.getCedula());
+            preparedStatement.setString(3, user.getFecha());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -47,7 +46,6 @@ public class DetalleDAO
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("delete from detalle where idDetalle=?");
-            // Parameters start with 1
             preparedStatement.setInt(1, idDetalle);
             preparedStatement.executeUpdate();
         }
@@ -61,11 +59,10 @@ public class DetalleDAO
     {
         try 
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("update detalle set idDetalle=?, nombreCliente=?, cedula=?, fecha=?" + "where idDetalle=?");
-            preparedStatement.setInt(1, user.getIdDetalle());
-            preparedStatement.setString(2, user.getNombreCliente());
-            preparedStatement.setInt(3, user.getCedula());
-            preparedStatement.setDate(4, new java.sql.Date(user.getFecha().getTime()));
+            PreparedStatement preparedStatement = connection.prepareStatement("update detalle set nombreCliente=?, cedula=?, fecha=?" + "where idDetalle=?");
+            preparedStatement.setString(1, user.getNombreCliente());
+            preparedStatement.setInt(2, user.getCedula());
+            preparedStatement.setString(3, user.getFecha());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -77,6 +74,7 @@ public class DetalleDAO
     public List<Detalle> getAllUsers()
     {
         List<Detalle> users = new ArrayList<Detalle>();
+        
         try
         {
             System.out.println("Llegue hasta aca");
@@ -89,7 +87,7 @@ public class DetalleDAO
                 user.setIdDetalle(rs.getInt("idDetalle"));
                 user.setNombreCliente(rs.getString("nombreCliente"));
                 user.setCedula(rs.getInt("cedula"));
-                user.setFecha(rs.getDate("fecha"));
+                user.setFecha(rs.getString("fecha"));
                 users.add(user);
             }
         }
@@ -103,17 +101,19 @@ public class DetalleDAO
     public Detalle getUserById(int idDetalle)
     {
         Detalle user = new Detalle();
+        
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("select * from detalle where idDetalle=?");
             preparedStatement.setInt(1, idDetalle);
             ResultSet rs = preparedStatement.executeQuery();
+            
             if (rs.next())
             {
                 user.setIdDetalle(rs.getInt("idDetalle"));
                 user.setNombreCliente(rs.getString("nombreCliente"));
                 user.setCedula(rs.getInt("cedula"));
-                user.setFecha(rs.getDate("fecha"));
+                user.setFecha(rs.getString("fecha"));
             }
         }
         catch (SQLException e)

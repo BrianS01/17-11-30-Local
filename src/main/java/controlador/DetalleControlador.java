@@ -7,9 +7,6 @@
 package controlador;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +32,7 @@ public class DetalleControlador extends HttpServlet
     {
         String forward = "";
         String action = request.getParameter("action");
+        
         if (action.equalsIgnoreCase("delete"))
         {
             int userId = Integer.parseInt(request.getParameter("idDetalle"));
@@ -67,17 +65,7 @@ public class DetalleControlador extends HttpServlet
     {
         Detalle user = new Detalle();
         user.setNombreCliente(request.getParameter("nombreCliente"));
-        
-        try
-        {
-            Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha"));
-            user.setFecha(fecha);
-        }
-        catch (ParseException e)
-        {
-            e.printStackTrace();
-        }
-        
+        user.setFecha(request.getParameter("fecha"));
         String idDetalle = request.getParameter("idDetalle");
         
         if (idDetalle == null || idDetalle.isEmpty())

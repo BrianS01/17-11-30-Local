@@ -6,14 +6,12 @@
 
 package modelo;
 
-import java.util.Date;
-
 public class Detalle
 {
     private int idDetalle;
-    private int cedula;
     private String nombreCliente;
-    private Date fecha;
+    private int cedula;
+    private String fecha;
 
     public int getIdDetalle()
     {
@@ -45,12 +43,12 @@ public class Detalle
         this.nombreCliente = nombreCliente;
     }
 
-    public Date getFecha()
+    public String getFecha()
     {
         return fecha;
     }
 
-    public void setFecha(Date fecha)
+    public void setFecha(String fecha)
     {
         this.fecha = fecha;
     }

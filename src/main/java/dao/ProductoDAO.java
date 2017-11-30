@@ -29,10 +29,9 @@ public class ProductoDAO
     {
         try
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into producto(idProducto,nombre,precio) values (?, ?, ?)");
-            preparedStatement.setInt(1, user.getIdProducto());
-            preparedStatement.setString(2, user.getNombre());
-            preparedStatement.setInt(3, user.getPrecio());
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into producto(nombre, precio) values (?, ?)");
+            preparedStatement.setString(1, user.getNombre());
+            preparedStatement.setInt(2, user.getPrecio());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -46,7 +45,6 @@ public class ProductoDAO
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("delete from producto where idProducto=?");
-            // Parameters start with 1
             preparedStatement.setInt(1, idProducto);
             preparedStatement.executeUpdate();
         }
@@ -60,10 +58,9 @@ public class ProductoDAO
     {
         try 
         {
-            PreparedStatement preparedStatement = connection.prepareStatement("update producto set idProducto=?, nombre=?, precio=?" + "where idProducto=?");
-            preparedStatement.setInt(1, user.getIdProducto());
-            preparedStatement.setString(2, user.getNombre());
-            preparedStatement.setInt(3, user.getPrecio());
+            PreparedStatement preparedStatement = connection.prepareStatement("update producto set nombre=?, precio=?" + "where idProducto=?");
+            preparedStatement.setString(1, user.getNombre());
+            preparedStatement.setInt(2, user.getPrecio());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e)
@@ -75,6 +72,7 @@ public class ProductoDAO
     public List<Producto> getAllUsers()
     {
         List<Producto> users = new ArrayList<Producto>();
+        
         try
         {
             System.out.println("Llegue hasta aca");
@@ -100,11 +98,13 @@ public class ProductoDAO
     public Producto getUserById(int idProducto)
     {
         Producto user = new Producto();
+        
         try
         {
             PreparedStatement preparedStatement = connection.prepareStatement("select * from producto where idProducto=?");
             preparedStatement.setInt(1, idProducto);
             ResultSet rs = preparedStatement.executeQuery();
+            
             if (rs.next())
             {
                 user.setIdProducto(rs.getInt("idProducto"));
